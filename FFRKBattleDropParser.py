@@ -2,7 +2,7 @@
 # Author: Mark Cerqueira (www.mark.gg)
 #
 # Hosted at: https://github.com/markcerqueira/ff-record-keeper
-# See sample JSON for parsing: https://gist.github.com/markcerqueira/59cf24051f0ca404f66c
+# See sample JSON for parsing: https://github.com/markcerqueira/ff-record-keeper/blob/master/battle-data.json
 #
 # Save the JSON text response from the battle/get_battle_init_data API from FFRK
 # and then run this program to print out a summary of items that will drop
@@ -13,6 +13,9 @@
 # This example reads data from battle-data.json and ouputs drops that will occur
 # at the end of each round (item type) and items that will drop when enemies are
 # defeated (item_id)
+#
+# NOTE: Before sharing the output of this script with others, you should scrub out
+# your user id using FFRKAnonymizer.py!
 
 import sys
 import json
@@ -22,16 +25,16 @@ with open(sys.argv[1]) as data_file:
     data = json.load(data_file)
 
     # load data for all rounds
-    round_data = data['battle']['rounds']
+    all_rounds_data = data['battle']['rounds']
     
     i = 1
-    for round in round_data:
+    for round_data in all_rounds_data:
         # print the drop for the round (all enemies in round killed) if any
-        for round_item_drop in round['drop_item_list']:
+        for round_item_drop in round_data['drop_item_list']:
             print "Round " + str(i) + " - round drop type = " + str(round_item_drop.get('type'))
 
         # print drops for each enemy
-        for enemy in round['enemy']:
+        for enemy in round_data['enemy']:
             for enemy_child in enemy['children']:
                 for enemy_child_drop in enemy_child['drop_item_list']:
                     if enemy_child_drop.get('item_id'):
@@ -42,4 +45,4 @@ with open(sys.argv[1]) as data_file:
                     elif enemy_child_drop.get('amount'):
                         print "Round " + str(i) + " - enemy drop will drop GOLD amount = " + str(enemy_child_drop.get('amount'))
 
-        i = i + 1
+        i += 1

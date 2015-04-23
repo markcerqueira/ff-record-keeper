@@ -9,7 +9,9 @@
 #
 # Usage: python FFRKAnonymizer.py JSON_FILE_NAME
 #
-# Example:
+# Example: python FFRKAnonymizer.py battle-data.json
+# This will anonymize the file battle-data.json and output the anonymized
+# version to battle-data-1429807698 (number is current Unix time).
 
 import sys
 import json
@@ -19,12 +21,24 @@ ANONYMOUS_USER_ID = str(1234567890)
 
 MIN_USER_ID_LENGTH = 16
 
+# set this to True if you want to force anonymization even if validate_user_id
+# returns False (useful for debugging)
+FORCE_ANONYMIZE = True
+
+# return the suffix that will be appended to anonymized files (e.g. "-1429807698")
+def get_anonymized_file_suffix():
+    return "-" + get_unix_time_str();
+
+
+# return unix time as string
 def get_unix_time_str():
     return str(int(time.time()))
 
 
+# anonymizes the file with name filename, scrubbing out user_id and replacing it
+# with ANONYMOUS_USER_ID
 def anonymize_file(filename, user_id):
-    outfile = open(filename + "-" + get_unix_time_str(), 'w')
+    outfile = open(filename + get_anonymized_file_suffix(), 'w')
 
     with open(filename, 'r+') as f:
         for line in f:
@@ -36,18 +50,19 @@ def anonymize_file(filename, user_id):
         outfile.close()
 
 
+# some basic sanity checking on the user_id we plan to scrub
 def validate_user_id(user_id):
     if not user_id:
         print "ERROR - user_id is empty. Aborting!"
-        return False
+        return FORCE_ANONYMIZE or False
 
     if user_id == ANONYMOUS_USER_ID:
         print "ERROR - file has already been anonymized. Aborting!"
-        return False
+        return FORCE_ANONYMIZE or False
 
     if len(user_id) < MIN_USER_ID_LENGTH:
         print "ERROR - user_id appears to be too short. Aborting!"
-        return False
+        return FORCE_ANONYMIZE or False
 
     return True
 
