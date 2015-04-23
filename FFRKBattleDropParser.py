@@ -1,7 +1,7 @@
 # FFRKBattleDropParser.py
 # Author: Mark Cerqueira (www.mark.gg)
 #
-# Hosted at: https://gist.github.com/markcerqueira/5714f0c4763cc14254e2
+# Hosted at: https://github.com/markcerqueira/ff-record-keeper
 # See sample JSON for parsing: https://gist.github.com/markcerqueira/59cf24051f0ca404f66c
 #
 # Save the JSON text response from the battle/get_battle_init_data API from FFRK

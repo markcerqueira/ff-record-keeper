@@ -1,7 +1,7 @@
 # FFRKItemIdParser.py
 # Author: Mark Cerqueira (www.mark.gg)
 #
-# Hosted at: https://gist.github.com/markcerqueira/dba639168700bd02a623
+# Hosted at: https://github.com/markcerqueira/ff-record-keeper
 # See sample JSON for parsing: https://gist.github.com/markcerqueira/d4ec280f5c448d7ca45e
 #
 # Save the JSON text response from the diff/party/list API from FFRK
