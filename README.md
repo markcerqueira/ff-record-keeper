@@ -4,7 +4,7 @@ Tools for [Final Fantasy Record Keeper][1]
 #### Files
 * **battle-data.json** - Sample response from the battle/get_battle_init_data API
 * **FFRKBattleDropParser.py** - With JSON response from the battle/get_battle_init_data API prints out items that will be dropped
-* **FFRKItemIdParser.py** - With JSON response from the diff/party/list API prints out item names and item ids
+* **FFRKItemIdParser.py** - With JSON response from the diff/party/list API prints out item names, item ids, and rarity
 * **party-list.json** - Sample response from the diff/party/list API
 
 #### Environment
