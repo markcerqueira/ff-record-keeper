@@ -4,7 +4,7 @@
 # Hosted at: https://github.com/markcerqueira/ff-record-keeper
 #
 # Currently supported API responses for anonymizing:
-#   * diff/party/list
+#   * dff/party/list
 #   * battle/get_battle_init_data
 #
 # Usage: python FFRKAnonymizer.py JSON_FILE_NAME
@@ -77,9 +77,9 @@ def main():
             print "Anonymizing a battle/get_battle_init_data API response"
             user_id = data['battle']['buddy'][0]['ability_panels'][0]['uid']
 
-        # diff/party/list
+        # dff/party/list
         if data.get('equipments') and data.get('materials'):
-            print "Anonymizing a diff/party/list API response"
+            print "Anonymizing a dff/party/list API response"
             user_id = str(data['party']['user_id'])
 
         # validate user_id before anonymizing

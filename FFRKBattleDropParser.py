@@ -20,13 +20,11 @@
 import sys
 import json
 
-with open(sys.argv[1]) as data_file: 
-    # load the JSON file  
-    data = json.load(data_file)
 
+def print_drops_from_json(data):
     # load data for all rounds
     all_rounds_data = data['battle']['rounds']
-    
+
     i = 1
     for round_data in all_rounds_data:
         # print the drop for the round (all enemies in round killed) if any
@@ -39,10 +37,24 @@ with open(sys.argv[1]) as data_file:
                 for enemy_child_drop in enemy_child['drop_item_list']:
                     if enemy_child_drop.get('item_id'):
                         if enemy_child_drop.get('type') == 51:
-                            print "Round " + str(i) + " - enemy will drop ORB with id = " + str(enemy_child_drop.get('item_id'))
+                            print "Round " + str(i) + " - enemy will drop ORB with id = " + str(
+                                enemy_child_drop.get('item_id'))
                         else:
-                            print "Round " + str(i) + " - enemy will drop EQUIPMENT with id = " + str(enemy_child_drop.get('item_id'))
+                            print "Round " + str(i) + " - enemy will drop EQUIPMENT with id = " + str(
+                                enemy_child_drop.get('item_id'))
                     elif enemy_child_drop.get('amount'):
-                        print "Round " + str(i) + " - enemy drop will drop GOLD amount = " + str(enemy_child_drop.get('amount'))
+                        print "Round " + str(i) + " - enemy drop will drop GOLD amount = " + str(
+                            enemy_child_drop.get('amount'))
 
         i += 1
+
+
+def main():
+    with open(sys.argv[1]) as data_file:
+        # load the JSON file
+        data = json.load(data_file)
+        print_drops_from_json(data)
+
+
+if __name__ == "__main__":
+    main()
