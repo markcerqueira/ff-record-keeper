@@ -15,7 +15,10 @@
 
 import sys
 import json
-import time
+
+from Utils import get_suffix_with_unix_time
+from Utils import dump_json_to_file
+from Utils import clean_up_filename
 
 ANONYMOUS_USER_ID = str(1234567890)
 
@@ -25,20 +28,13 @@ MIN_USER_ID_LENGTH = 16
 # returns False (useful for debugging)
 FORCE_ANONYMIZE = True
 
-# return the suffix that will be appended to anonymized files (e.g. "-1429807698")
-def get_anonymized_file_suffix():
-    return "-" + get_unix_time_str();
-
-
-# return unix time as string
-def get_unix_time_str():
-    return str(int(time.time()))
-
 
 # anonymizes the file with name filename, scrubbing out user_id and replacing it
 # with ANONYMOUS_USER_ID
 def anonymize_file(filename, user_id):
-    outfile = open(filename + get_anonymized_file_suffix(), 'w')
+    out_filename = clean_up_filename(filename + get_suffix_with_unix_time())
+
+    outfile = open(out_filename, 'w')
 
     with open(filename, 'r+') as f:
         for line in f:
@@ -67,24 +63,35 @@ def validate_user_id(user_id):
     return True
 
 
+# pulls the user id from json_data and dumps json_data to filename if a
+# file with that name does not exist (this case can happen if anonymize_json
+# is called externally with just JSON and no file)
+def anonymize_json(json_data, filename):
+    # this method may be called with a filename that does not exist
+    # so we want to create the file which is required for subsequent logic
+    dump_json_to_file(json_data, filename)
+
+    user_id = ""
+
+    # battle/get_battle_init_data API
+    if json_data.get('battle'):
+        print "Anonymizing a battle/get_battle_init_data API response"
+        user_id = json_data['battle']['buddy'][0]['ability_panels'][0]['uid']
+
+    # dff/party/list
+    if json_data.get('equipments') and json_data.get('materials'):
+        print "Anonymizing a dff/party/list API response"
+        user_id = str(json_data['party']['user_id'])
+
+    # validate user_id before anonymizing
+    if validate_user_id(user_id):
+        anonymize_file(filename, user_id)
+
+
 def main():
     with open(sys.argv[1]) as data_file:
         data = json.load(data_file)
-        user_id = ""
-
-        # battle/get_battle_init_data API
-        if data.get('battle'):
-            print "Anonymizing a battle/get_battle_init_data API response"
-            user_id = data['battle']['buddy'][0]['ability_panels'][0]['uid']
-
-        # dff/party/list
-        if data.get('equipments') and data.get('materials'):
-            print "Anonymizing a dff/party/list API response"
-            user_id = str(data['party']['user_id'])
-
-        # validate user_id before anonymizing
-        if validate_user_id(user_id):
-            anonymize_file(sys.argv[1], user_id)
+        anonymize_json(data, sys.argv[1])
 
 
 if __name__ == "__main__":

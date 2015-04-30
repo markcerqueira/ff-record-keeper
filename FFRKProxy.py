@@ -25,14 +25,23 @@ from libmproxy.proxy.server import ProxyServer
 from FFRKBattleDropParser import print_drops_from_json
 from FFRKItemIdParser import print_equipment_id_from_json
 
+from Utils import get_suffix_with_unix_time
+from Utils import dump_json_to_file
+
 
 DEFAULT_PORT = 8080
 
+# dump handled content to a file; WARNING - files are not anonymized and may include
+# sensitive user information. See FFRKAnonymizer.py for more info
+DUMP_CONTENT_TO_FILES = True
+
 FFRK_HOST = 'ffrk.denagames.com'
 
-PATH_EQUIPMENT_LIST = 'dff/party/list'
-PATH_BATTLE_INFO = 'get_battle_init_data'
+EQUIPMENT_LIST_PATH = 'dff/party/list'
+EQUIPMENT_LIST_FILENAME = 'party_list'
 
+BATTLE_INFO_PATH = 'get_battle_init_data'
+BATTLE_INFO_FILENAME = 'get_battle_init_data'
 
 class FFRKProxy(controller.Master):
     def __init__(self, server):
@@ -49,19 +58,35 @@ class FFRKProxy(controller.Master):
 
     def handle_response(self, flow):
         # we only care about URLs that are going to FFRK_HOST
+
+
         if FFRK_HOST in flow.request.host:
             # get_battle_init_data call
-            if PATH_BATTLE_INFO in flow.request.path:
+            if BATTLE_INFO_PATH in flow.request.path:
                 print flow.request.path + " called"
                 with decoded(flow.response):
-                    print_drops_from_json(json.loads(flow.response.content))
+                    json_data = json.loads(flow.response.content)
+                    print_drops_from_json(json_data)
+
+                    if DUMP_CONTENT_TO_FILES:
+                        dump_json_to_file(json_data, BATTLE_INFO_FILENAME + get_suffix_with_unix_time())
+
                 print ""
 
             # dff/party/list call
-            if PATH_EQUIPMENT_LIST in flow.request.path:
+            elif EQUIPMENT_LIST_PATH in flow.request.path:
                 print flow.request.path + " called"
                 with decoded(flow.response):
-                    print_equipment_id_from_json(json.loads(flow.response.content))
+                    json_data = json.loads(flow.response.content)
+                    print_equipment_id_from_json(json_data)
+
+                    if DUMP_CONTENT_TO_FILES:
+                        dump_json_to_file(json_data, EQUIPMENT_LIST_FILENAME + get_suffix_with_unix_time())
+
+                print ""
+
+            else:
+                print flow.request.path + " called; no processing done"
                 print ""
 
         # forward the reply so it gets passed on
