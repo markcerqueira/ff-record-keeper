@@ -30,7 +30,7 @@ device to point at the proxy and when a known API passes through the proxy, the 
 response body and print just that. See "Example FFRKProxy Output" for an example of what this looks like.
 * **Utils.py** - Shared utility methods used by the other scripts
 
-* **data** - Contains CSV files used by Utils.py to map item ids to weapons, armor, orbs, and accessories. Data fetched from the [r/FFRecordKeeper][11] community-maintained [Google spreadsheet][10]
+* **data** - Contains CSV files used by Utils.py to map item ids to weapons, armor, orbs, and accessories. Data fetched from the [r/FFRecordKeeper][11] community-maintained [Google spreadsheet][10].
 * **json** - Sample JSON from the /dff/party/list and get_battle_init_data APIs (anonymized using FFRKAnonymizer)
 
 #### Environment
@@ -54,7 +54,7 @@ Please feel free to fork, improve, and open a [pull request][6]. More JSON data 
 #### Learn More
 * [Blog post][2] describing more reliable Black Cowl farming using FFRKBattleDropParser.py
 * [Reddit post][3] about more reliable Black Cowl farming
-* Jon Chang's [Record Peeker][9], a cleverly named proxy that is similar to this one!
+* Jon Chang's [Record Peeker][9], a cleverly-named proxy that is similar to this one!
 
 [1]: http://www.finalfantasyrecordkeeper.com/
 [2]: http://mark.gg/2015/04/18/peeking-into-final-fantasy-record-keeper/
