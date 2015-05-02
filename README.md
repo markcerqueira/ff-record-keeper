@@ -18,7 +18,6 @@ The most useful script here is the FFRKProxy. It creates a proxy using [libmprox
     Knight Armor (III), 22054008, 3
     Major Earth Orb, 40000050, 5
     
-    
     /dff/battle/get_battle_init_data called
     
 #### File/Folder Descriptions
