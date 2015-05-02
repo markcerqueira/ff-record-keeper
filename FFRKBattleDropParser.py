@@ -20,6 +20,7 @@
 import sys
 import json
 
+from Utils import get_description_for_item_id
 
 def print_drops_from_json(data):
     # load data for all rounds
@@ -36,15 +37,9 @@ def print_drops_from_json(data):
             for enemy_child in enemy['children']:
                 for enemy_child_drop in enemy_child['drop_item_list']:
                     if enemy_child_drop.get('item_id'):
-                        if enemy_child_drop.get('type') == 51:
-                            print "Round " + str(i) + " - enemy will drop ORB with id = " + str(
-                                enemy_child_drop.get('item_id'))
-                        else:
-                            print "Round " + str(i) + " - enemy will drop EQUIPMENT with id = " + str(
-                                enemy_child_drop.get('item_id'))
+                        print "Round " + str(i) + " - enemy will drop " + get_description_for_item_id(enemy_child_drop.get('item_id'))
                     elif enemy_child_drop.get('amount'):
-                        print "Round " + str(i) + " - enemy drop will drop GOLD amount = " + str(
-                            enemy_child_drop.get('amount'))
+                        print "Round " + str(i) + " - enemy will drop GOLD amount = " + str(enemy_child_drop.get('amount'))
 
         i += 1
 

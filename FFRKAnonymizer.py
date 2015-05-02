@@ -20,13 +20,15 @@ from Utils import get_suffix_with_unix_time
 from Utils import dump_json_to_file
 from Utils import clean_up_filename
 
+# Your user id will be replaced with this user id
 ANONYMOUS_USER_ID = str(1234567890)
 
+# When validating the user id, we check to see if it is this long
 MIN_USER_ID_LENGTH = 16
 
 # set this to True if you want to force anonymization even if validate_user_id
 # returns False (useful for debugging)
-FORCE_ANONYMIZE = True
+FORCE_ANONYMIZE = False
 
 
 # anonymizes the file with name filename, scrubbing out user_id and replacing it

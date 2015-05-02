@@ -29,6 +29,8 @@ from Utils import get_suffix_with_unix_time
 from Utils import dump_json_to_file
 
 
+# The default port the proxy runs on. You can change it here or specify one
+# on the command-line to override this default.
 DEFAULT_PORT = 8080
 
 # dump handled content to a file; WARNING - files are not anonymized and may include
