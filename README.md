@@ -21,7 +21,7 @@ The most useful script here is the FFRKProxy. It creates a proxy using [libmprox
     
     /dff/battle/get_battle_init_data called
     
-#### File/Folders Descriptions
+#### File/Folder Descriptions
 * **FFRKAnonymizer.py** - Given a JSON response, "anonymizes" it by removing the user_id and replacing it with 1234567890
 * **FFRKBattleDropParser.py** - With JSON response from the battle/get_battle_init_data API prints out items that will be dropped
 * **FFRKItemIdParser.py** - With JSON response from the diff/party/list API prints out item names, item ids, and rarity
