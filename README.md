@@ -1,7 +1,7 @@
 # ff-record-keeper
 Tools for [Final Fantasy Record Keeper][1]
 
-The most useful script here is the FFRKProxy. It creates a proxy using [libmproxy/mitmproxy][7]. See the Environment section below for how to set up Python and libmproxy. Then run FFRKProxy.py and point your device at your computer's IP address and the port number specified by FFRKProxy. Then watch the data roll in as you play FFRK.
+The most useful script here is FFRKProxy. It creates a proxy using [libmproxy/mitmproxy][7]. See the Environment section below for how to set up Python and libmproxy/mitmproxy. Then run FFRKProxy.py and point your device at your computer's IP address and the port number specified by FFRKProxy. Then watch the data roll in as you play FFRK.
 
     ~src/ff-record-keeper [master] python FFRKProxy.py
     IP Address = 10.0.0.1, Port = 8080
@@ -27,7 +27,8 @@ The most useful script here is the FFRKProxy. It creates a proxy using [libmprox
 * **FFRKProxy.py** - Runs a simple proxy that wraps the response-parsing functionality of the other Python files. You set your
 device to point at the proxy and when a known API passes through the proxy, the proxy will parse relevant information out of the 
 response body and print just that. See "Example FFRKProxy Output" for an example of what this looks like.
-* **Utils.py** - Shared utility methods used by the other scripts
+* **Test.py** - Unit tests that exercise functionality of scripts.
+* **Utils.py** - Shared utility methods used by the other scripts.
 
 * **data** - Contains CSV files used by Utils.py to map item ids to weapons, armor, orbs, and accessories. Data fetched from the [r/FFRecordKeeper][11] community-maintained [Google spreadsheet][10].
 * **json** - Sample JSON from the /dff/party/list and get_battle_init_data APIs (anonymized using FFRKAnonymizer)

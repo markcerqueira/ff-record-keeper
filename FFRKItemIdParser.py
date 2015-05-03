@@ -27,7 +27,9 @@ import json
 item_dict = dict()
 
 
-def print_equipment_id_from_json(data):
+def get_equipment_id_from_json(data):
+    result = ""
+
     # put equipment in the dictionary
     for equipment in data['equipments']:
         item_dict[equipment['name'].encode('utf8')] = [str(equipment['equipment_id']).encode('utf8'),
@@ -40,14 +42,16 @@ def print_equipment_id_from_json(data):
 
     # print out equipment/materials names to item ids and base_rarity
     for key in item_dict:
-        print key + ", " + str(item_dict[key][0]) + ", " + str(item_dict[key][1])
+        result += key + ", " + str(item_dict[key][0]) + ", " + str(item_dict[key][1]) + "\n"
+
+    return result
 
 
 def main():
     with open(sys.argv[1]) as data_file:
         # load the JSON file
         data = json.load(data_file)
-        print_equipment_id_from_json(data)
+        get_equipment_id_from_json(data)
 
 
 if __name__ == "__main__":

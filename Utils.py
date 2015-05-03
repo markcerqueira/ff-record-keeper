@@ -67,22 +67,3 @@ def get_description_for_item_id(item_id):
         return get_description_for_item_id_with_csv_file(item_id, open('data/orbs.csv'), "ORB")
     else:
         return "Unknown prefix for item id = " + str(item_id)
-
-
-# runs some tests on get_description_for_item_id
-def test_get_description_for_item_id():
-    # standard tests on each CSV file for item ids that are present
-    print get_description_for_item_id(str(21002002))  # WEAPON: Iron Sword (XII), rarity = 2*, id = 21002002
-    print get_description_for_item_id(str(23080016))  # ACCESSORY: Sniper Eye (VI), rarity = 1*, id = 23080016
-    print get_description_for_item_id(str(22056004))  # ARMOR: Carbon Bangle (VII), rarity = 2*, id = 22056004
-    print get_description_for_item_id(str(40000014))  # ORB: Greater Black Orb, rarity = 4*, id = 40000014
-
-    # test when an item id does not exist in the respective CSV file
-    print get_description_for_item_id(str(22000000))  # Unknown ARMOR with id = 22000000
-
-    # test when we get an unknown prefix
-    print get_description_for_item_id(str(32000000))  # Unknown prefix for item id = 32000000
-
-
-if __name__ == "__main__":
-    test_get_description_for_item_id()

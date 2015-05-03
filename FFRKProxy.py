@@ -22,8 +22,8 @@ from libmproxy import controller, proxy
 from libmproxy.protocol.http import decoded
 from libmproxy.proxy.server import ProxyServer
 
-from FFRKBattleDropParser import print_drops_from_json
-from FFRKItemIdParser import print_equipment_id_from_json
+from FFRKBattleDropParser import get_drops_from_json
+from FFRKItemIdParser import get_equipment_id_from_json
 
 from Utils import get_suffix_with_unix_time
 from Utils import dump_json_to_file
@@ -68,28 +68,23 @@ class FFRKProxy(controller.Master):
                 print flow.request.path + " called"
                 with decoded(flow.response):
                     json_data = json.loads(flow.response.content)
-                    print_drops_from_json(json_data)
+                    print get_drops_from_json(json_data)
 
                     if DUMP_CONTENT_TO_FILES:
                         dump_json_to_file(json_data, BATTLE_INFO_FILENAME + get_suffix_with_unix_time())
-
-                print ""
 
             # dff/party/list call
             elif EQUIPMENT_LIST_PATH in flow.request.path:
                 print flow.request.path + " called"
                 with decoded(flow.response):
                     json_data = json.loads(flow.response.content)
-                    print_equipment_id_from_json(json_data)
+                    print get_equipment_id_from_json(json_data)
 
                     if DUMP_CONTENT_TO_FILES:
                         dump_json_to_file(json_data, EQUIPMENT_LIST_FILENAME + get_suffix_with_unix_time())
 
-                print ""
-
             else:
-                print flow.request.path + " called; no processing done"
-                print ""
+                print flow.request.path + " called; no processing done\n"
 
         # forward the reply so it gets passed on
         flow.reply()

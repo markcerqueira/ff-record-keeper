@@ -22,33 +22,37 @@ import json
 
 from Utils import get_description_for_item_id
 
-def print_drops_from_json(data):
+def get_drops_from_json(data):
     # load data for all rounds
     all_rounds_data = data['battle']['rounds']
+
+    result_string = ""
 
     i = 1
     for round_data in all_rounds_data:
         # print the drop for the round (all enemies in round killed) if any
         for round_item_drop in round_data['drop_item_list']:
-            print "Round " + str(i) + " - round drop type = " + str(round_item_drop.get('type'))
+            result_string += "Round " + str(i) + " - round drop type = " + str(round_item_drop.get('type')) + "\n"
 
         # print drops for each enemy
         for enemy in round_data['enemy']:
             for enemy_child in enemy['children']:
                 for enemy_child_drop in enemy_child['drop_item_list']:
                     if enemy_child_drop.get('item_id'):
-                        print "Round " + str(i) + " - enemy will drop " + get_description_for_item_id(enemy_child_drop.get('item_id'))
+                        result_string += "Round " + str(i) + " - enemy will drop " + get_description_for_item_id(enemy_child_drop.get('item_id')) + "\n"
                     elif enemy_child_drop.get('amount'):
-                        print "Round " + str(i) + " - enemy will drop GOLD amount = " + str(enemy_child_drop.get('amount'))
+                        result_string += "Round " + str(i) + " - enemy will drop GOLD amount = " + str(enemy_child_drop.get('amount')) + "\n"
 
         i += 1
+
+    return result_string
 
 
 def main():
     with open(sys.argv[1]) as data_file:
         # load the JSON file
         data = json.load(data_file)
-        print_drops_from_json(data)
+        print get_drops_from_json(data)
 
 
 if __name__ == "__main__":
