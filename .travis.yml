@@ -3,9 +3,12 @@ language:
 
 python:
   - "2.7"
+  
+before_install:
+    pip install --upgrade setuptools
     
 # install dependencies
-install: "pip install --upgrade setuptools && pip install mitmproxy"
+install: "pip install mitmproxy"
 
 # command to run tests
 script: Test.py
