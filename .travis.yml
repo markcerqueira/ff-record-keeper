@@ -1,6 +1,3 @@
-os:
-    - osx
-    
 language: 
     - python
 
@@ -12,7 +9,7 @@ python:
   - "3.4"
     
 # install dependencies
-install: "pip install lxml && pip install mitmproxy"
+install: "curl https://bootstrap.pypa.io/ez_setup.py -o - | python && pip install lxml && pip install mitmproxy"
 
 # command to run tests
 script: Test.py
