@@ -12,7 +12,7 @@ python:
   - "3.4"
     
 # install dependencies
-install: "pip install mitmproxy"
+install: "pip install lxml && pip install mitmproxy"
 
 # command to run tests
 script: Test.py
