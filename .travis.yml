@@ -8,7 +8,9 @@ before_install:
     pip install --upgrade setuptools
     
 # install dependencies
-install: "pip install mitmproxy"
+install:
+    pip install mitmproxy
 
 # command to run tests
-script: Test.py
+script:
+    python Test.py
