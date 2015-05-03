@@ -1,4 +1,4 @@
-# ff-record-keeper
+# ff-record-keeper [![Build Status](https://travis-ci.org/markcerqueira/ff-record-keeper.svg?branch=master)](https://travis-ci.org/markcerqueira/ff-record-keeper)
 Tools for [Final Fantasy Record Keeper][1]
 
 The most useful script here is FFRKProxy. It creates a proxy using [libmproxy/mitmproxy][7]. See the Environment section below for how to set up Python and libmproxy/mitmproxy. Then run FFRKProxy.py and point your device at your computer's IP address and the port number specified by FFRKProxy. Then watch the data roll in as you play FFRK.
