@@ -9,7 +9,7 @@ python:
   - "3.4"
     
 # install dependencies
-install: "curl https://bootstrap.pypa.io/ez_setup.py -o - | python && pip install lxml && pip install mitmproxy"
+install: "pip install --upgrade setuptools && pip install mitmproxy"
 
 # command to run tests
 script: Test.py
