@@ -48,6 +48,10 @@ FFRKProxy uses [libmproxy][7]. Visit the [Installation][8] page to learn how to 
 Please feel free to share instructions for set up on other platforms and I will post them here! And please let me know
 if any of the above instructions do not work.
 
+##### Set-up on Windows
+
+See this [helpful post on Reddit][12] by the redditor, /u/chencichen, on setting up FFRKProxy on Windows. Thanks for sharing!
+
 #### Contribute
 Please feel free to fork, improve, and open a [pull request][6]. More JSON data (anonymized of course) would be greatly appreciated! If you want to contribute without using GitHub, feel free to email me at: {GitHub username} at gmail dot com.
 
@@ -67,3 +71,4 @@ Please feel free to fork, improve, and open a [pull request][6]. More JSON data 
 [9]: https://github.com/jonchang/recordpeeker
 [10]: https://docs.google.com/spreadsheets/d/1A4evEuBVvMzq9ap_5aWLLgnmKwB76coff22_WeBzhyM/edit#gid=554203550
 [11]: https://www.reddit.com/r/FFRecordKeeper/
+[12]: https://www.reddit.com/r/FFRecordKeeper/comments/34p36e/how_to_peek_items_drops_in_windows/
